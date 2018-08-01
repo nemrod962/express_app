@@ -19,12 +19,15 @@ function($http, entriesService, debugService, urlService, dialogService)
      */
     factory.enviarPeticion = function(id,url)
     {
+        console.log("brute url: " + url);
         var data = urlService.checkURL(url);
+        console.log("brute data: ");
+        console.log(data);
         //Petición Remota
-        var miUrl = data['protocol']+data['host']+data['pathname'];
+        var miUrl = urlService.urlToString(data);
         factory.postdata(id,miUrl);
         //Petición Local
-        var localUrl = data['protocol']+'localhost:3000'+data['pathname'];
+        var localUrl = urlService.urlToString(urlService.urlToLocal(data));
         factory.postdata(id,localUrl);
         //Ambas respuestas se han registrado dentro de la funcion postdata().
         //Se emplean las variables factory.localResponse y factory.remoteResponse
@@ -155,9 +158,9 @@ function($http, entriesService, debugService, urlService, dialogService)
         console.log("COMPARANDO...");
         const resp1 = JSON.stringify(entriesService.getEntryLocalResponse(id));
         const resp2 = JSON.stringify(entriesService.getEntryRemoteResponse(id));
-        //Variables que contendrán sólo el atributo 'res' de las respuestas.
-        const resResp1 = JSON.stringify(entriesService.getEntryLocalResponse(id)['res']);
-        const resResp2 = JSON.stringify(entriesService.getEntryRemoteResponse(id)['res']);
+        //Variables que contendrán sólo el atributo 'data' de las respuestas.
+        const resResp1 = JSON.stringify(entriesService.getEntryLocalResponse(id)['data']);
+        const resResp2 = JSON.stringify(entriesService.getEntryRemoteResponse(id)['data']);
         console.log("json resp1: " + resp1);
         console.log("json resp2: " + resp2);
         console.log("json res1: " + resResp1);

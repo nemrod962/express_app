@@ -25,7 +25,7 @@ app.set('view engine', 'html');
 //sentencia para definir la ruta de los html
 app.use(express.static(path.resolve(__dirname, path.join(process.cwd(), 'public'))));
 
-//añadimos los elementos requeridos por express De este modo después podemos utilizar variables como #{config.title} dentro de nuestras plantillas.
+//aÃ±adimos los elementos requeridos por express De este modo despuÃ©s podemos utilizar variables como #{config.title} dentro de nuestras plantillas.
 app.use(require('serve-favicon')(path.resolve(__dirname, path.join(process.cwd(), 'public', 'image','favicon.ico'))));
 app.use(require('morgan')('combined'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -57,7 +57,10 @@ module.exports = app;
 //indicamos la direccion del archivo routes
 require(path.resolve(__dirname, path.join(process.cwd(), 'router')))();
 
+//OPENSHIFT
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || configuracion.port;
+var server_ip_address= process.env.OPENSHIFT_NODEJS_IP|| '127.0.0.1';
 
-app.listen(configuracion.port, () => {
+app.listen(server_port, server_ip_address, () => {
     console.log(`Escuchando en puerto:${configuracion.port}`);
 });

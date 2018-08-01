@@ -58,9 +58,9 @@ module.exports = app;
 require(path.resolve(__dirname, path.join(process.cwd(), 'router')))();
 
 //OPENSHIFT
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || configuracion.port;
-var server_ip_address= process.env.OPENSHIFT_NODEJS_IP|| '127.0.0.1';
+var server_port = process.env.PORT || 8080;
+var server_ip_address= process.env.IP|| '127.0.0.1';
 
-app.listen(server_port, server_ip_address, () => {
+app.listen(server_port, () => {
     console.log(`Escuchando en puerto:${configuracion.port}`);
 });

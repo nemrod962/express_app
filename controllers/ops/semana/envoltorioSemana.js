@@ -4,7 +4,6 @@
 var path = require('path');
 var ModeloClima = require(path.resolve(__dirname, path.join(process.cwd(), 'models', 'weather.js')));
 
-
 //---
 
 //---

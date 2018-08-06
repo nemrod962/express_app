@@ -25,7 +25,7 @@ app.set('view engine', 'html');
 //sentencia para definir la ruta de los html
 app.use(express.static(path.resolve(__dirname, path.join(process.cwd(), 'public'))));
 
-//añadimos los elementos requeridos por express De este modo después podemos utilizar variables como #{config.title} dentro de nuestras plantillas.
+//a�adimos los elementos requeridos por express De este modo despu�s podemos utilizar variables como #{config.title} dentro de nuestras plantillas.
 app.use(require('serve-favicon')(path.resolve(__dirname, path.join(process.cwd(), 'public', 'image','favicon.ico'))));
 app.use(require('morgan')('combined'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,7 +37,7 @@ app.use(require('cookie-parser')());
 app.locals.settings = app.get('settings');
 //definimos una variable de sesion de la app
 var sess = {
-    secret: 'Cookie Pump Verder Proyect web',
+    secret: 'cadenasecreta',
     cookie: {},
     resave: true,
     saveUninitialized: true,
@@ -57,10 +57,9 @@ module.exports = app;
 //indicamos la direccion del archivo routes
 require(path.resolve(__dirname, path.join(process.cwd(), 'router')))();
 
-//OPENSHIFT
-var server_port = process.env.PORT || 8080;
-var server_ip_address= process.env.IP|| '127.0.0.1';
+//puerto
+var server_port = process.env.PORT || configuracion.port;
 
 app.listen(server_port, () => {
-    console.log(`Escuchando en puerto:${configuracion.port}`);
+    console.log(`Escuchando en puerto:${server_port}`);
 });

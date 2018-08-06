@@ -10,14 +10,12 @@
     <LINK href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div id="topbar">
+    <%- include ../topbar.ejs -%>
+    <div class="textDiv errorDiv">
         <h2>
-            <img id="logo" src="/image/Esqueleto.png">
             <span id="titulo">Error 404</span>
         </h2>
-    </div>
-    <div class="errorDiv">
-        <p class="errorText"> 
+        <p> 
             <span class="errorCode">404</span>
             - El recurso al que se ha intentado acceder no existe.
         </p>

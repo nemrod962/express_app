@@ -4,7 +4,6 @@
 var path = require('path');
 var ModeloClima = require(path.resolve(__dirname, path.join(process.cwd(), 'models', 'weather.js')));
 
-
 //---
 
 //---
@@ -82,21 +81,9 @@ module.exports = {
                 //Envio respuesta
                 respuesta.send(resMsg);
             });
-    },
-    /**Devuelve filtro de Mongoose para la fecha indicada.
-     * Pensado para recibir un año como paŕametro.
-    */
-    filtroAnio : function(fecha)
-    {
-        //var a = new Date(2018,0,1,1,0,0) 
-        //a -> Date 2018-01-01T00:00:00.000Z
-        //String(a) -> "Mon Jan 01 2018 01:00:00 GMT+0100 (CET)"
-        const fechaMin = new Date(String(fecha));
-        const fechaMax = new Date(String(fecha+1));
-        const filtro = {dia :{$gt: fechaMin, $lt: fechaMax}};
-        return filtro;
     }
 }
+
 
 /**FUNCIONES INTERNAS */
 
@@ -104,7 +91,7 @@ module.exports = {
  * Todos los datos están en la misma lista.
  * También recibe como parámetro un objeto vacío, el 
  * cual se empleará como diccionario, almacenando los
- * datos clasificados por año.
+ * datos clasificados por mes.
  * Los objetos se pasan por referencia, por lo que
  * no hace falta devolver nada ya que la variable 
  * dataDict conservará los cambios.
@@ -129,13 +116,13 @@ function clasificarDatosMes(datos, dataDict)
 }
 
 /**Procesa los datos en dataDict (contiene los datos en bruto
- * clasificados por año) y los procesa empleando la función
+ * clasificados por mes) y los procesa empleando la función
  * 'funcion', la cual será una de las tres medias.
- * Los resultados que se van obteniendo (por año), se van
- * almacenando en resDict (por año).
+ * Los resultados que se van obteniendo (por mes), se van
+ * almacenando en resDict (por mes).
  * 
  * 'campo' es una cadena que contiene los campos a emplear
- * separados por espacios. Lo normal es que contenga dos,
+ * separados por espacios. Lo normal es que contenga dos:
  * el campo sobre el cual calcular la media y 'dia', ya que
  * tenemos que operar con las fechas. El primer campo que
  * se encuentre en esta cadena es el que se empleará

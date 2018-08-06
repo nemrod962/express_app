@@ -13,12 +13,11 @@ body {
     color: #373737;
     /*Margen*/
     margin: 0;
-}
-h2 {
-    color: #C0B283;
+    /*Fuente*/
+    font-family: Verdana, Geneva, sans-serif;
 }
 
-li{
+#menuWrapper li{
     list-style: none;
 }
 /*
@@ -139,31 +138,60 @@ input[type=text] {
 #logo
 {
     width:40px;
-    vertical-align: middle;
     padding-left: 15px;
     padding-right: 10px;
+    padding-top: 10px;
     float: left;
-    /*margin-top: -10px;*/
 }
 
 #topbar
 {
     background-color: #DCD0C0;
     overflow: hidden;
-    display: block;
+    /*display: block;*/
     text-align: center;
 }
 
-#topbar h2
+#topbar #titulo
 {
-    font-size: 32px;
+    color: #C0B283;
+    font-size: 38px;
+    font-weight: bold;
+    text-decoration: none;
     /*Contorno*/
     text-shadow:
     -1px -1px 0 #373737,
     1px -1px 0 #373737,
     -1px 1px 0 #373737,
     1px 1px 0 #373737;
+    display: inline-block;
+    margin-top: 5px;
+
+    width: 0px;
+
 }
+
+#topbar #topLinks{
+    float: right;
+}
+
+#topbar #topLinks a{
+    color: #F4F4F4;
+    text-align: right;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    padding: 22px 12px;
+    /*border: solid 1px;*/
+    font-weight: bold;
+}
+
+#topbar #topLinks a:hover{
+    color: #C0B283;;
+    background-color: #F4F4F4
+}
+
+/*---------------------*/
 
 #indiceEntrada
 {
@@ -178,15 +206,19 @@ input[type=text] {
 }
 
 /*Estilo para las páginas de errores (404, 500...)*/
-.errorDiv{
-    text-align: center;
+.textDiv{
     border: 3px solid #C0B283;
     border-radius: 5px;
     display: block;
     margin: 10px 5%;
+    padding: 0 20px;
 }
 
-.errorText
+.errorDiv{
+    text-align: center;
+}
+
+.text
 {
     padding: 0 10;
 }

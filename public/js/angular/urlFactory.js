@@ -17,18 +17,27 @@ app.factory('urlService', function()
                         
     */
     //URLS
+
+    //Variables locales. Cuando una petición
+    //sea local, se emplearán este hostname ç
+    //y este puerto.
+    //Hostname
+    factory.localHost = window.location.hostname;
+    //Puerto
+    factory.localPort = window.location.port;
+
     /**Para parsear una cadena y sacar info si es URL */
     factory.parseURL = function(href) {
-        var match = href.match(/^((https?\:)\/\/)?(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+        var match = href.match(/^(https?\:\/\/)?(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
         var data = {
             href: href,
-            protocol: match[2],
-            host: match[3],
-            hostname: match[4],
-            port: match[5],
-            pathname: match[6],
-            search: match[7],
-            hash: match[8]
+            protocol: match[1],
+            host: match[2],
+            hostname: match[3],
+            port: match[4],
+            pathname: match[5],
+            search: match[6],
+            hash: match[7]
             //Los relevantes en mi caso
             //son hostname, port y pathname
             //hostname + port = host
@@ -54,12 +63,14 @@ app.factory('urlService', function()
         //Si no se especifica hostname doy por sentado que es localhost
         if(data['hostname']==undefined || data['hostname']=='')
         {
-            data['hostname']='localhost';
+            //data['hostname']='localhost';
+            data['hostname']=factory.localHost;
         }
         //Si no se especifica puerto doy por sentado que es 80
         if(data['port']==undefined || data['port']=='')
         {
-            data['port']='3000';
+            //data['port']='3000';
+            data['port']=factory.localPort;
         }
         data['host']= data['hostname']+':'+data['port'];
 
@@ -82,7 +93,8 @@ app.factory('urlService', function()
     factory.isLocalUrl = function(url)
     {
         var urlData = factory.parseURL(url);
-        return urlData['hostname']=='localhost';
+        //return urlData['hostname']=='localhost';
+        return urlData['hostname']==factory.localHost;
     }
 
     /**Dado una url como un objecto, devuelve una cadena
@@ -104,16 +116,14 @@ app.factory('urlService', function()
         //alterar el original
         var localUrl = Object.assign({},url);
         //realizo cambios en la copia
-        localUrl['hostname']='localhost';
-        localUrl['port']='3000';
+        //localUrl['hostname']='localhost';
+        localUrl['hostname']=factory.localHost;
+        //localUrl['port']='3000';
+        localUrl['port']=factory.localPort;
         localUrl['host']= localUrl['hostname']+':'+localUrl['port'];
         //retorno la copia
         return localUrl;
     }
-
-    factory.method1 = function(){
-        window.alert("SOY EL FATORY URL!");
-    };
 
     return factory;
 });
